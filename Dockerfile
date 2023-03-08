@@ -8,9 +8,9 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --link talon talon
-COPY --link requirements.txt .
-
 RUN pip install --user ./talon
+
+COPY --link requirements.txt .
 RUN pip install --user -r requirements.txt
 
 FROM python:3.10-slim-bullseye
