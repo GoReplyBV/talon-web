@@ -2,6 +2,8 @@ from talon import quotations
 
 from flask import Flask, request
 
+quotations.register_xpath_extensions()
+
 app = Flask(__name__)
 
 
