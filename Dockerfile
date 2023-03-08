@@ -21,6 +21,4 @@ COPY --link app.py .
 
 ENV PATH=/root/.local/bin:$PATH
 
-ENTRYPOINT ["python"]
-
-CMD ["app.py"]
+ENTRYPOINT ["gunicorn", "app:app", "--bind=0.0.0.0:5000", "--log-level=debug", "--workers=4"]
