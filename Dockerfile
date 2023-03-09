@@ -18,7 +18,10 @@ FROM python:3.10-slim-bullseye
 COPY --link --from=compile-image /root/.local /root/.local
 
 COPY --link app.py .
+COPY --link healthcheck.py .
 
 ENV PATH=/root/.local/bin:$PATH
+
+HEALTHCHECK --interval=10s --timeout=3s --retries=3 CMD ["python", "healthcheck.py"]
 
 ENTRYPOINT ["gunicorn", "app:app", "--bind=0.0.0.0:5000", "--log-level=debug", "--workers=4"]
